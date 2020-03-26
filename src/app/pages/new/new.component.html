@@ -1,0 +1,50 @@
+<section class="new">
+    <div class="cont-bar">
+      <div class="logo"></div>
+    </div>
+    <div class="cont-form">
+      <h1>Nuevo mensaje</h1>
+      <div class="cont-form-data">
+        <form class="form" [formGroup]="newForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <div class="form-group-controls">
+              <label>Asunto:</label>
+              <input type="text" formControlName="asunto" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.asunto.errors }" placeholder="Asunto"/>
+            </div>
+            <div *ngIf="submitted && f.asunto.errors" class="invalid-feedback">
+              <div *ngIf="f.asunto.errors.required">Asunto requerido.</div>
+              <div *ngIf="f.asunto.errors.maxlength">El asunto debe contener como máximo caracteres.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-group-controls">
+              <label>Destinatario:</label>
+              <input type="email" formControlName="correo" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.correo.errors }" placeholder="Destinatario"/>
+            </div>
+            <div *ngIf="submitted && f.correo.errors" class="invalid-feedback">
+              <div *ngIf="f.correo.errors.required">Correo requerido.</div>
+              <div *ngIf="f.correo.errors.pattern">La correo tener el formato adecuado.</div>
+              <!-- <div *ngIf="f.correo.errors.email">La correo tener el formato adecuado.</div> -->
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-group-controls">
+              <label>Descripción:</label>
+              <input type="text" formControlName="descripcion" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }" />
+            </div>
+            <div *ngIf="submitted && f.descripcion.errors" class="invalid-feedback">
+              <div *ngIf="f.descripcion.errors.required">Descripción requerida.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary">Enviar</button>
+            <a routerLink="/inbox" class="btn btn-secundary">Cancelar</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+  
