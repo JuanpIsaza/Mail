@@ -1,37 +1,8 @@
-<section class="login">
-    <div class="cont-bar">
-      <div class="logo"></div>
+<section class="login uk-margin-top">
+  <div class="cont-form">
+    <h1>Ingreso al sistema</h1>
+    <div class="cont-form-data">
+      <app-user-form [form]="loginForm" (send)="onSubmit()"></app-user-form>
     </div>
-    <div class="cont-form">
-      <h1>Ingreso al sistema</h1>
-      <div class="cont-form-data">
-        <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          <div class="form-group">
-            <div class="form-group-controls">
-              <label>Usuario</label>
-              <input type="text" formControlName="user" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f.user.errors }" />
-            </div>
-            <div *ngIf="submitted && f.user.errors" class="invalid-feedback">
-              <div *ngIf="f.user.errors.required">Usuario requerido.</div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="form-group-controls">
-              <label>Contraseña</label>
-              <input type="password" formControlName="password" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-            </div>
-            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-              <div *ngIf="f.password.errors.required">Contraseña requerida.</div>
-              <div *ngIf="f.password.errors.minlength">La contraseña debe contener al menos 6 caracteres.</div>
-            </div>
-          </div>
-          <div class="form-group">
-            <button class="btn btn-primary">Ingresar</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </section>
-  
+  </div>
+</section>

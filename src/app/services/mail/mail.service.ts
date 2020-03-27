@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +9,13 @@ export class MailService {
   URI: string = environment.URI;
 
   constructor(private http: HttpClient) {}
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    })
+  };
 
   // Retorna los correos de la bandeja(Inbox).
   // Si se envia el parametro id nos retorna el detalle de ese mensaje.
@@ -22,7 +29,7 @@ export class MailService {
 
   // Metodo para enviar un nuevo mensaje.
   postInboxSent(form) {
-    return this.http.post(`${this.URI}/inbox/send`, form);
+    return this.http.post(`${this.URI}/inbox/send`, form, this.httpOptions);
   }
 
   // Metodo para eliminar un mensaje.

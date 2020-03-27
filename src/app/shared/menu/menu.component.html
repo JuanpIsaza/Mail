@@ -1,6 +1,24 @@
-<div class="vertical-menu">
-  <a routerLink="/inbox" class="active">Bandeja de entrada</a>
-  <a routerLink="/sent">Enviados</a>
-  <a routerLink="/deleted">Eliminados</a>
-  <a routerLink="/new">Nuevo</a>
-</div>
+<nav class=" nav-bar uk-navbar-container uk-navbar">
+  <div class="uk-navbar-left">
+    <ul class="uk-nav uk-nav-default">
+      <li class="uk-active uk-text-large">
+        <a [routerLink]="'inbox'"
+          ><span class="uk-margin-small-right" uk-icon="icon: copy"></span> Bandeja de entrada</a
+        >
+      </li>
+      <li class="uk-active uk-text-large">
+        <a [routerLink]="'sent'">
+          <span class="uk-margin-small-right" uk-icon="icon: file-edit"></span>Enviados</a
+        >
+      </li>
+      <li class="uk-active uk-text-large">
+        <a [routerLink]="'deleted'"
+          ><span class="uk-margin-small-right" uk-icon="icon: trash"></span> Eliminados</a
+        >
+      </li>
+      <li class="uk-active uk-text-large">
+        <a [routerLink]="'new'"> <span class="uk-margin-small-right" uk-icon="icon: plus"></span>Nuevo</a>
+      </li>
+    </ul>
+  </div>
+</nav>

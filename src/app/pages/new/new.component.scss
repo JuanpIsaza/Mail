@@ -1,0 +1,19 @@
+.new {
+  display: flex;
+  justify-content: center;
+  .error {
+    color: #e91e63;
+  }
+  .cont-form {
+    width: 50%;
+    .form-group-controls {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      .description {
+        height: 400px;
+        resize: none;
+      }
+    }
+  }
+}

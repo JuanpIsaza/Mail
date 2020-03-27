@@ -1,0 +1,13 @@
+.app{
+  display: flex;
+  width: 100%;
+  .menu{
+    width: 15%;
+    height: 100vh;
+    background-color: #f8f8f8;
+    padding: 20px;
+  }
+  .data{
+    width: 85%;
+  }
+}
