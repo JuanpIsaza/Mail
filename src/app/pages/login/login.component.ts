@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { Router } from '@angular/router';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/internal/operators';
 
 @Component({
   selector: 'app-login',
@@ -9,13 +12,12 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  submitted = false;
-
   doLogin$;
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -31,21 +33,38 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
-
-    if (this.loginForm.invalid) {
-      return;
-    }
-
-    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.loginForm.value));
     console.log(this.loginForm.value);
 
     this.doLogin(this.loginForm.value);
   }
 
   doLogin(form) {
-    this.doLogin$ = this.authService.postUser(form).subscribe(res => {
-      console.log(res);
-    });
+    this.doLogin$ = this.authService
+      .postUser(form)
+      .pipe(
+        catchError(error => {
+          let errorMessage = '';
+          if (error instanceof ErrorEvent) {
+            // client-side error
+            errorMessage = `Client-side error: ${error.error.message}`;
+          } else {
+            // backend error
+            errorMessage = `Server-side error: ${error.status} ${error.message}`;
+          }
+
+          // aquí podrías agregar código que muestre el error en alguna parte fija de la pantalla.
+          // this.errorService.show(errorMessage);
+          console.log('error message', errorMessage);
+          return throwError(errorMessage);
+        })
+      )
+      .subscribe(
+        res => {
+          console.log(res);
+          localStorage.setItem('datos', JSON.stringify(res));
+          this.router.navigate(['../inbox']);
+        },
+        error => console.log('error subscribe', error)
+      );
   }
 }

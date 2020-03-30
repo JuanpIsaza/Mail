@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MailService } from 'src/app/services/mail/mail.service';
+import { catchError } from 'rxjs/internal/operators';
+import { throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new',
@@ -8,30 +12,64 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class NewComponent implements OnInit {
   newForm: FormGroup;
-  submitted = false;
+  // submitted = false;
 
-  constructor(private formBuilder: FormBuilder) {}
+  postMails$;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private mailService: MailService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.newForm = this.formBuilder.group({
-      asunto: ['', [Validators.required, Validators.maxLength(50)]],
-      correo: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
-      // correo: ['', [Validators.required, Validators.email]],
-      descripcion: ['', Validators.required],
+      subject: ['', [Validators.required, Validators.maxLength(50)]],
+      // receiver: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+      receiver: ['', [Validators.required, Validators.email]],
+      description: ['', Validators.required]
     });
   }
 
-  get f() {
-    return this.newForm.controls;
+  onSubmit() {
+    const userData = localStorage.getItem('datos');
+
+    console.log(userData);
+
+    this.newInbox(JSON.parse(userData), this.newForm.value);
   }
 
-  onSubmit() {
-    this.submitted = true;
+  newInbox({ user }, form) {
+    user = user.toLowerCase();
+    form.sender = `${user}@gmail.com`;
 
-    if (this.newForm.invalid) {
-      return;
-    }
+    console.log(form);
 
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.newForm.value));
+    this.postMails$ = this.mailService
+      .postInboxSent(form)
+      .pipe(
+        catchError(error => {
+          let errorMessage = '';
+          if (error instanceof ErrorEvent) {
+            // client-side error
+            errorMessage = `Client-side error: ${error.error.message}`;
+          } else {
+            // backend error
+            errorMessage = `Server-side error: ${error.status} ${error.message}`;
+          }
+
+          // aquí podrías agregar código que muestre el error en alguna parte fija de la pantalla.
+          // this.errorService.show(errorMessage);
+          console.log('error message', errorMessage);
+          return throwError(errorMessage);
+        })
+      )
+      .subscribe(
+        res => {
+          console.log(res);
+          this.router.navigate(['../inbox']);
+        },
+        error => console.log('error subscribe', error)
+      );
   }
 }

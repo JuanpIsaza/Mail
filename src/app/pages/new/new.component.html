@@ -1,7 +1,4 @@
 <section class="new uk-margin-top">
-    <div class="cont-bar">
-      <div class="logo"></div>
-    </div>
     <div class="cont-form">
       <h1>Nuevo mensaje</h1>
       <div class="cont-form-data">
@@ -9,38 +6,38 @@
           <div class="form-group uk-margin-top ">
             <div class="form-group-controls">
               <label class="uk-margin-right">Asunto:</label>
-              <input type="text" formControlName="asunto" class="form-control uk-input"
-                [ngClass]="{ 'is-invalid': submitted && f.asunto.errors }" placeholder="Asunto"/>
+              <input type="text" formControlName="subject" class="form-control uk-input"
+                [ngClass]="{ 'is-invalid': newForm.get(['subject']).errors && newForm.untouched}" placeholder="Asunto"/>
             </div>
-            <div *ngIf="submitted && f.asunto.errors" class="invalid-feedback">
-              <div class="error" *ngIf="f.asunto.errors.required">Asunto requerido.</div>
-              <div class="error" *ngIf="f.asunto.errors.maxlength">El asunto debe contener como máximo caracteres.</div>
+            <div *ngIf="newForm.get(['subject']).errors" class="invalid-feedback">
+              <div class="error" *ngIf="newForm.get(['subject']).errors.required && !newForm.get(['subject']).untouched">Asunto requerido.</div>
+              <div class="error" *ngIf="newForm.get(['subject']).errors.maxlength && !newForm.get(['subject']).untouched">El Asunto debe contener como máximo caracteres.</div>
             </div>
           </div>
           <div class="form-group uk-margin-top ">
             <div class="form-group-controls">
               <label class="uk-margin-right">Destinatario:</label>
-              <input type="email" formControlName="correo" class="form-control uk-input"
-                [ngClass]="{ 'is-invalid': submitted && f.correo.errors }" placeholder="Destinatario"/>
+              <input type="email" formControlName="receiver" class="form-control uk-input"
+                [ngClass]="{ 'is-invalid': newForm.get(['receiver']).errors && !newForm.get(['receiver']).untouched}" placeholder="Destinatario"/>
             </div>
-            <div *ngIf="submitted && f.correo.errors" class="invalid-feedback">
-              <div class="error" *ngIf="f.correo.errors.required">Correo requerido.</div>
-              <div class="error" *ngIf="f.correo.errors.pattern">La correo tener el formato adecuado.</div>
-              <!-- <div *ngIf="f.correo.errors.email">La correo tener el formato adecuado.</div> -->
+            <div *ngIf="newForm.get(['receiver']).errors && !newForm.get(['receiver']).untouched" class="invalid-feedback">
+              <div class="error" *ngIf="newForm.get(['receiver']).errors.required && !newForm.get(['receiver']).untouched">Correo requerido.</div>
+              <div class="error" *ngIf="newForm.get(['receiver']).errors.email && !newForm.get(['receiver']).untouched">El Correo debe tener el formato adecuado.</div>
+              <!-- <div class="error" *ngIf="newForm.get(['receiver']).errors.pattern && !newForm.get(['receiver']).untouched">El Correo debe tener el formato adecuado.</div> -->
             </div>
           </div>
           <div class="form-group uk-margin-top ">
             <div class="form-group-controls cont-text-area">
               <label class="uk-margin-right">Descripción:</label>
-              <textarea formControlName="descripcion" class="form-control description uk-textarea"
-                [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }"></textarea>
+              <textarea formControlName="description" class="form-control description uk-textarea"
+                [ngClass]="{ 'is-invalid': newForm.get(['description']).errors && !newForm.get(['description']).untouched }"></textarea>
             </div>
-            <div *ngIf="submitted && f.descripcion.errors" class="invalid-feedback">
-              <div class="error" *ngIf="f.descripcion.errors.required">Descripción requerida.</div>
+            <div *ngIf="newForm.get(['description']).errors" class="invalid-feedback">
+              <div class="error" *ngIf="newForm.get(['description']).errors.required && !newForm.get(['description']).untouched">Descripción requerida.</div>
             </div>
           </div>
           <div class="form-group uk-margin-top uk-align-right">
-            <button class="btn btn-primary uk-button uk-button-primary uk-margin-right">Enviar</button>
+            <button class="btn btn-primary uk-button uk-button-primary uk-margin-right" [disabled]="newForm.invalid">Enviar</button>
             <a routerLink="/inbox" class="btn btn-secundary uk-button uk-button-danger">Cancelar</a>
           </div>
         </form>

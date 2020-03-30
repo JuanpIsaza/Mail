@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+
+.uk-table-hover tbody tr:hover,
+.uk-table-hover > tr:hover {
+  background: #d7edff;
+}

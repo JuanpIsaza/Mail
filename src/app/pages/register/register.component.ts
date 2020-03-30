@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  submitted = false;
 
   doRegister$;
 
@@ -28,18 +27,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  get f() {
-    return this.registerForm.controls;
-  }
-
   onSubmit() {
-    this.submitted = true;
-
-    if (this.registerForm.invalid) {
-      return;
-    }
-
-    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value));
     this.doRegister(this.registerForm.value);
   }
 

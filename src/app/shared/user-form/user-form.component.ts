@@ -15,18 +15,7 @@ export class UserFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  get f() {
-    return this.form.controls;
-  }
-
   onSubmit() {
-    this.submitted = true;
-
-    if (this.form.invalid) {
-      return;
-    }
-
     this.send.emit();
-    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value));
   }
 }

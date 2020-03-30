@@ -34,21 +34,26 @@ export class MailService {
 
   // Metodo para eliminar un mensaje.
   deleteInbox(id) {
-    return this.http.delete(`${this.URI}/delete/:${id}`);
+    return this.http.delete(`${this.URI}/delete/${id}`);
   }
 
   // Metodo para agregar a fovoritos un mensaje.
   putInboxFavorite(form) {
-    return this.http.put(`${this.URI}/inbox/:${form.id}`, form);
+    return this.http.put(`${this.URI}/inbox/${form.id}`, form);
   }
 
   // Retorna los mensajes que correspondan al correo enviado.
   // Si se envia el parametro id nos retorna el detalle de ese mensaje.
   getSent(mail, id?) {
+
+    mail = mail.toLowerCase();
+    console.log(mail);
+    const compEmail = '@gmail.com';
+
     if (id) {
-      return this.http.get(`${this.URI}/sent/:${mail}/:${id}`);
+      return this.http.get(`${this.URI}/sent/${mail}${compEmail}/:${id}`);
     } else {
-      return this.http.get(`${this.URI}/sent/:${mail}`);
+      return this.http.get(`${this.URI}/sent/${mail}${compEmail}`);
     }
   }
 }
