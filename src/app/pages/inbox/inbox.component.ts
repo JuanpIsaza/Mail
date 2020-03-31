@@ -12,6 +12,8 @@ export class InboxComponent implements OnInit {
   getMails$;
   mails;
   msgGetMails = false;
+  msgFavoriteMails = false;
+  msgDeleteMails = false;
   mailsDeleted;
 
   constructor(private mailService: MailService) {}
@@ -69,6 +71,7 @@ export class InboxComponent implements OnInit {
           }
 
           // aquí podrías agregar código que muestre el error en alguna parte fija de la pantalla.
+          this.msgFavoriteMails = true;
           // this.errorService.show(errorMessage);
           console.log('error message', errorMessage);
           return throwError(errorMessage);
@@ -98,6 +101,7 @@ export class InboxComponent implements OnInit {
           }
 
           // aquí podrías agregar código que muestre el error en alguna parte fija de la pantalla.
+          this.msgDeleteMails = true;
           // this.errorService.show(errorMessage);
           console.log('error message', errorMessage);
           return throwError(errorMessage);
@@ -106,6 +110,9 @@ export class InboxComponent implements OnInit {
       .subscribe(
         res => {
           // Pendiente la forma de guardar la informacion que estoy borrando.
+          this.mailsDeleted += form;
+          console.log(this.mailsDeleted);
+
           this.getMails(this.getLocalstorage());
         },
         error => console.log('error subscribe', error)

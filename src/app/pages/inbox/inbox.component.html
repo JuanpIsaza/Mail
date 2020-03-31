@@ -85,5 +85,15 @@
         Error al obtener los mensajes.
       </div>
     </ng-container>
+    <ng-container *ngIf="msgFavoriteMails">
+      <div class="uk-text-danger uk-margin-top">
+        Error al marcar como favorito mensajes.
+      </div>
+    </ng-container>
+    <ng-container *ngIf="msgDeleteMails">
+      <div class="uk-text-danger uk-margin-top">
+        Error al eliminar los mensajes.
+      </div>
+    </ng-container>
   </div>
 </section>
