@@ -15,12 +15,15 @@ export class InboxComponent implements OnInit {
   constructor(private mailService: MailService) {}
 
   ngOnInit(): void {
-    this.getMails();
+    const userData = localStorage.getItem('datos');
+
+    console.log('objetoObtenido: ', JSON.parse(userData));
+    this.getMails(JSON.parse(userData));
   }
 
-  getMails() {
+  getMails({ user }) {
     this.getMails$ = this.mailService
-      .getInbox()
+      .getInbox(user)
       .pipe(
         catchError(error => {
           let errorMessage = '';

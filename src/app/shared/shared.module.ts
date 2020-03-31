@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu/menu.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UserFormComponent } from './user-form/user-form.component';
-import { Routes, RouterModule } from '@angular/router';
-
-
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [

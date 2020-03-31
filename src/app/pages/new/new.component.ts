@@ -46,7 +46,7 @@ export class NewComponent implements OnInit {
     console.log(form);
 
     this.postMails$ = this.mailService
-      .postInboxSent(form)
+      .postInboxSent(user, form)
       .pipe(
         catchError(error => {
           let errorMessage = '';
