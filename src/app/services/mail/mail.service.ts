@@ -41,11 +41,13 @@ export class MailService {
   }
 
   // Metodo para eliminar un mensaje.
-  deleteInbox(mail, id) {
+  deleteInbox(mail, { id }) {
+    console.log({ mail, id });
+
     mail = mail.toLowerCase();
     const compEmail = '@gmail.com';
     const headers = this.headers.append('User-Email', `${mail}${compEmail}`);
-    return this.http.delete(`${this.URI}/delete/${id}`, { headers });
+    return this.http.delete(`${this.URI}/inbox/delete/${id}`, { headers });
   }
 
   // Metodo para agregar a fovoritos un mensaje.
@@ -53,7 +55,9 @@ export class MailService {
     mail = mail.toLowerCase();
     const compEmail = '@gmail.com';
     const headers = this.headers.append('User-Email', `${mail}${compEmail}`);
-    return this.http.put(`${this.URI}/inbox/${form.id}`, form, { headers });
+    return this.http.put(`${this.URI}/inbox/favorite/${form.id}`, form, {
+      headers
+    });
   }
 
   // Retorna los mensajes que correspondan al correo enviado.

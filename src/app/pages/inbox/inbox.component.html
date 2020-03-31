@@ -12,6 +12,7 @@
             <th>Asunto</th>
             <th>Destinatario</th>
             <th>Descripción</th>
+            <th>Eliminar mensaje</th>
           </tr>
         </thead>
         <tbody>
@@ -27,13 +28,20 @@
             <td>{{ mail.subject }}</td>
             <td class="">{{ mail.receiver }}</td>
             <td class="">{{ mail.description }}</td>
+            <td>
+              <input
+                class="uk-checkbox"
+                type="checkbox"
+                (click)="doDelete(mail)"
+              />
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="uk-overflow-auto">
       <table
-        class="uk-table uk-table-hover uk-table-striped uk-table-middle uk-table-divider"
+        class="uk-table uk-table-hover uk-margin-top uk-table-striped uk-table-middle uk-table-divider"
       >
         <thead>
           <tr>
@@ -41,6 +49,7 @@
             <th>Asunto</th>
             <th>Destinatario</th>
             <th>Descripción</th>
+            <th>Eliminar mensaje</th>
           </tr>
         </thead>
         <tbody>
@@ -56,6 +65,13 @@
             <td>{{ mail.subject }}</td>
             <td class="">{{ mail.receiver }}</td>
             <td class="">{{ mail.description }}</td>
+            <td>
+              <input
+                class="uk-checkbox"
+                type="checkbox"
+                (click)="doDelete(mail)"
+              />
+            </td>
           </tr>
         </tbody>
       </table>

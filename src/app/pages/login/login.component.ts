@@ -35,8 +35,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.loginForm.value);
-
     this.doLogin(this.loginForm.value);
   }
 
@@ -62,7 +60,6 @@ export class LoginComponent implements OnInit {
       )
       .subscribe(
         res => {
-          console.log(res);
           localStorage.setItem('datos', JSON.stringify(res));
           this.router.navigate(['../inbox']);
         },
