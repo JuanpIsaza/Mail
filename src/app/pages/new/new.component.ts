@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class NewComponent implements OnInit {
   newForm: FormGroup;
+  msgNewInbox = false;
   postMails$;
 
   constructor(
@@ -53,6 +54,7 @@ export class NewComponent implements OnInit {
           }
 
           // aquí podrías agregar código que muestre el error en alguna parte fija de la pantalla.
+          this.msgNewInbox = true;
           // this.errorService.show(errorMessage);
           console.log('error message', errorMessage);
           return throwError(errorMessage);
