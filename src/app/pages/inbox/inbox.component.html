@@ -1,80 +1,89 @@
 <section class="inbox uk-margin-top">
   <div class="cont-form uk-container">
     <h1>Bandeja de entrada</h1>
-    <div class="uk-overflow-auto">
-      <h3>Favoritos</h3>
-      <table
-        class="uk-table uk-table-hover uk-table-striped uk-table-middle uk-table-divider"
-      >
-        <thead>
-          <tr>
-            <th>Favorito</th>
-            <th>Asunto</th>
-            <th>Destinatario</th>
-            <th>Descripción</th>
-            <th>Eliminar mensaje</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let mail of mails | filterFavorites: true; index as i">
-            <td>
-              <input
-                class="uk-checkbox"
-                type="checkbox"
-                value="{{ mail.favorite }}"
-                (click)="doFavorite(mail)"
-              />
-            </td>
-            <td>{{ mail.subject }}</td>
-            <td class="">{{ mail.receiver }}</td>
-            <td class="">{{ mail.description }}</td>
-            <td>
-              <input
-                class="uk-checkbox"
-                type="checkbox"
-                (click)="doDelete(mail)"
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="uk-overflow-auto">
-      <table
-        class="uk-table uk-table-hover uk-margin-top uk-table-striped uk-table-middle uk-table-divider"
-      >
-        <thead>
-          <tr>
-            <th>Favorito</th>
-            <th>Asunto</th>
-            <th>Destinatario</th>
-            <th>Descripción</th>
-            <th>Eliminar mensaje</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let mail of mails | filterFavorites: false; index as i">
-            <td>
-              <input
-                class="uk-checkbox"
-                type="checkbox"
-                value="{{ mail.favorite }}"
-                (click)="doFavorite(mail)"
-              />
-            </td>
-            <td>{{ mail.subject }}</td>
-            <td class="">{{ mail.receiver }}</td>
-            <td class="">{{ mail.description }}</td>
-            <td>
-              <input
-                class="uk-checkbox"
-                type="checkbox"
-                (click)="doDelete(mail)"
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <ng-container *ngIf="mails">
+      <div class="uk-overflow-auto">
+        <h3>Favoritos</h3>
+        <table
+          class="uk-table uk-table-hover uk-table-striped uk-table-middle uk-table-divider"
+        >
+          <thead>
+            <tr>
+              <th>Favorito</th>
+              <th>Asunto</th>
+              <th>Destinatario</th>
+              <th>Descripción</th>
+              <th>Eliminar mensaje</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let mail of mails | filterFavorites: true; index as i">
+              <td>
+                <input
+                  class="uk-checkbox"
+                  type="checkbox"
+                  value="{{ mail.favorite }}"
+                  (click)="doFavorite(mail)"
+                />
+              </td>
+              <td>{{ mail.subject }}</td>
+              <td class="">{{ mail.receiver }}</td>
+              <td class="">{{ mail.description }}</td>
+              <td>
+                <input
+                  class="uk-checkbox"
+                  type="checkbox"
+                  (click)="doDelete(mail)"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="mails">
+      <div class="uk-overflow-auto">
+        <table
+          class="uk-table uk-table-hover uk-margin-top uk-table-striped uk-table-middle uk-table-divider"
+        >
+          <thead>
+            <tr>
+              <th>Favorito</th>
+              <th>Asunto</th>
+              <th>Destinatario</th>
+              <th>Descripción</th>
+              <th>Eliminar mensaje</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let mail of mails | filterFavorites: false; index as i">
+              <td>
+                <input
+                  class="uk-checkbox"
+                  type="checkbox"
+                  value="{{ mail.favorite }}"
+                  (click)="doFavorite(mail)"
+                />
+              </td>
+              <td>{{ mail.subject }}</td>
+              <td class="">{{ mail.receiver }}</td>
+              <td class="">{{ mail.description }}</td>
+              <td>
+                <input
+                  class="uk-checkbox"
+                  type="checkbox"
+                  (click)="doDelete(mail)"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="msgGetMails">
+      <div class="uk-text-danger uk-margin-top">
+        Error al obtener los mensajes.
+      </div>
+    </ng-container>
   </div>
 </section>

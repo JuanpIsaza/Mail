@@ -11,6 +11,7 @@ import { throwError } from 'rxjs';
 export class InboxComponent implements OnInit {
   getMails$;
   mails;
+  msgGetMails = false;
   mailsDeleted;
 
   constructor(private mailService: MailService) {}
@@ -39,6 +40,7 @@ export class InboxComponent implements OnInit {
           }
 
           // aquí podrías agregar código que muestre el error en alguna parte fija de la pantalla.
+          this.msgGetMails = true;
           // this.errorService.show(errorMessage);
           console.log('error message', errorMessage);
           return throwError(errorMessage);

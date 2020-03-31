@@ -2,7 +2,15 @@
   <div class="cont-form">
     <h1>Ingreso al sistema</h1>
     <div class="cont-form-data">
-      <app-user-form [form]="loginForm" [route]="routeRegister" [textbtn]="textbtn" (send)="onSubmit()"></app-user-form>
+      <app-user-form
+        [form]="loginForm"
+        [route]="routeRegister"
+        [textbtn]="textbtn"
+        (send)="onSubmit()"
+      ></app-user-form>
+      <ng-container *ngIf="msgLogin">
+        <div class="uk-text-danger uk-margin-top">Error al intentar ingresar al sistema.</div>
+      </ng-container>
     </div>
   </div>
 </section>

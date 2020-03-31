@@ -13,6 +13,7 @@ import { catchError } from 'rxjs/internal/operators';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   doLogin$;
+  msgLogin = false;
   routeRegister = '/register';
   textbtn = 'Registrar';
 
@@ -28,10 +29,6 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
       // password: ['', [Validators.required, Validators.minLength(6)]]
     });
-  }
-
-  get f() {
-    return this.loginForm.controls;
   }
 
   onSubmit() {
@@ -53,6 +50,7 @@ export class LoginComponent implements OnInit {
           }
 
           // aquí podrías agregar código que muestre el error en alguna parte fija de la pantalla.
+          this.msgLogin = true;
           // this.errorService.show(errorMessage);
           console.log('error message', errorMessage);
           return throwError(errorMessage);
