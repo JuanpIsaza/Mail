@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    localStorage.removeItem('datos');
     this.loginForm = this.formBuilder.group({
       user: ['', Validators.required],
       password: ['', Validators.required]

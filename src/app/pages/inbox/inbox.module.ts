@@ -13,11 +13,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [InboxComponent],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    PipesModule
-  ],
+  imports: [CommonModule, RouterModule.forChild(routes), PipesModule],
   exports: [RouterModule]
 })
-export class InboxModule { }
+export class InboxModule {}

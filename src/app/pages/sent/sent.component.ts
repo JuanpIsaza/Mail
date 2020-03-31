@@ -10,6 +10,7 @@ import { throwError } from 'rxjs';
 })
 export class SentComponent implements OnInit {
   getMails$;
+  msgSent = false;
   mails;
 
   constructor(private mailService: MailService) {}
@@ -35,6 +36,7 @@ export class SentComponent implements OnInit {
           }
 
           // aquí podrías agregar código que muestre el error en alguna parte fija de la pantalla.
+          this.msgSent = true;
           // this.errorService.show(errorMessage);
           console.log('error message', errorMessage);
           return throwError(errorMessage);

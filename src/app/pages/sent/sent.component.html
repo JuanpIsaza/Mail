@@ -29,5 +29,10 @@
         </tbody>
       </table>
     </div>
+    <ng-container *ngIf="msgSent">
+      <div class="uk-text-danger uk-margin-top">
+        Error al cargar los mensajes enviados.
+      </div>
+    </ng-container>
   </div>
 </section>

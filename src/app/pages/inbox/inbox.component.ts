@@ -84,6 +84,7 @@ export class InboxComponent implements OnInit {
         error => console.log('error subscribe', error)
       );
   }
+
   doDelete(form) {
     console.log(form);
 

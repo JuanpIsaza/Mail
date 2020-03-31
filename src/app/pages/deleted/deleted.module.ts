@@ -12,10 +12,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [DeletedComponent],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes)
-  ],
+  imports: [CommonModule, RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DeletedModule { }
+export class DeletedModule {}

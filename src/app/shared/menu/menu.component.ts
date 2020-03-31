@@ -7,15 +7,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
+  constructor(private router: Router) {}
 
-  constructor(private router: Router) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-
-  signOut(){
+  signOut() {
     localStorage.removeItem('datos');
     this.router.navigate(['../login']);
   }
-
 }

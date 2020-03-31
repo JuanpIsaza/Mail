@@ -3,24 +3,33 @@
     <ul class="uk-nav uk-nav-default">
       <li class="uk-active">
         <a [routerLink]="'inbox'"
-          ><span class="uk-margin-small-right" uk-icon="icon: copy"></span> Bandeja de entrada</a
+          ><span class="uk-margin-small-right" uk-icon="icon: copy"></span>
+          Bandeja de entrada</a
         >
       </li>
       <li class="uk-active">
         <a [routerLink]="'sent'">
-          <span class="uk-margin-small-right" uk-icon="icon: file-edit"></span>Enviados</a
+          <span class="uk-margin-small-right" uk-icon="icon: file-edit"></span
+          >Enviados</a
         >
       </li>
       <li class="uk-active">
         <a [routerLink]="'deleted'"
-          ><span class="uk-margin-small-right" uk-icon="icon: trash"></span> Eliminados</a
+          ><span class="uk-margin-small-right" uk-icon="icon: trash"></span>
+          Eliminados</a
         >
       </li>
       <li class="uk-active">
-        <a [routerLink]="'new'"> <span class="uk-margin-small-right" uk-icon="icon: plus"></span>Nuevo</a>
+        <a [routerLink]="'new'">
+          <span class="uk-margin-small-right" uk-icon="icon: plus"></span
+          >Nuevo</a
+        >
       </li>
       <li class="uk-active">
-        <a (click)="signOut()"> <span class="uk-margin-small-right" uk-icon="icon: sign-out"></span>Salir</a>
+        <a (click)="signOut()">
+          <span class="uk-margin-small-right" uk-icon="icon: sign-out"></span
+          >Salir</a
+        >
       </li>
     </ul>
   </div>
