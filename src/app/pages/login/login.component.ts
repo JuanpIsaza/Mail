@@ -13,6 +13,8 @@ import { catchError } from 'rxjs/internal/operators';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   doLogin$;
+  routeRegister = '/register';
+  textbtn = 'Registrar';
 
   constructor(
     private formBuilder: FormBuilder,

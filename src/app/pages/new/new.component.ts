@@ -12,8 +12,6 @@ import { Router } from '@angular/router';
 })
 export class NewComponent implements OnInit {
   newForm: FormGroup;
-  // submitted = false;
-
   postMails$;
 
   constructor(
@@ -34,16 +32,12 @@ export class NewComponent implements OnInit {
   onSubmit() {
     const userData = localStorage.getItem('datos');
 
-    console.log(userData);
-
     this.newInbox(JSON.parse(userData), this.newForm.value);
   }
 
   newInbox({ user }, form) {
     user = user.toLowerCase();
     form.sender = `${user}@gmail.com`;
-
-    console.log(form);
 
     this.postMails$ = this.mailService
       .postInboxSent(user, form)
@@ -66,7 +60,6 @@ export class NewComponent implements OnInit {
       )
       .subscribe(
         res => {
-          console.log(res);
           this.router.navigate(['../inbox']);
         },
         error => console.log('error subscribe', error)

@@ -17,8 +17,6 @@ export class SentComponent implements OnInit {
   ngOnInit(): void {
     const userData = localStorage.getItem('datos');
 
-    console.log('objetoObtenido: ', JSON.parse(userData));
-
     this.getMails(JSON.parse(userData));
   }
 
@@ -44,7 +42,6 @@ export class SentComponent implements OnInit {
       )
       .subscribe(
         res => {
-          console.log(res);
           this.mails = res;
         },
         error => console.log('error subscribe', error)

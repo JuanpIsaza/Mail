@@ -10,61 +10,56 @@ export class MailService {
 
   constructor(private http: HttpClient) {}
 
+  headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*'
+  });
+
   httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
-    })
+    headers: new HttpHeaders()
   };
 
   // Retorna los correos de la bandeja(Inbox).
   // Si se envia el parametro id nos retorna el detalle de ese mensaje.
   getInbox(mail, id?) {
     mail = mail.toLowerCase();
-    console.log(mail);
     const compEmail = '@gmail.com';
-    this.httpOptions.headers.append('User-Email', `${compEmail}`);
-    console.log(this.httpOptions.headers);
+    const headers = this.headers.append('User-Email', `${mail}${compEmail}`);
     if (id) {
-      return this.http.get(`${this.URI}/inbox/${id}`, this.httpOptions);
+      return this.http.get(`${this.URI}/inbox/${id}`, { headers });
     } else {
-      return this.http.get(`${this.URI}/inbox`);
+      return this.http.get(`${this.URI}/inbox`, { headers });
     }
   }
 
   // Metodo para enviar un nuevo mensaje.
   postInboxSent(mail, form) {
     mail = mail.toLowerCase();
-    console.log(mail);
     const compEmail = '@gmail.com';
-    this.httpOptions.headers.append('User-Email', `${compEmail}`);
-    return this.http.post(`${this.URI}/inbox/send`, form, this.httpOptions);
+    const headers = this.headers.append('User-Email', `${mail}${compEmail}`);
+    return this.http.post(`${this.URI}/inbox/send`, form, { headers });
   }
 
   // Metodo para eliminar un mensaje.
   deleteInbox(mail, id) {
     mail = mail.toLowerCase();
-    console.log(mail);
     const compEmail = '@gmail.com';
-    this.httpOptions.headers.append('User-Email', `${compEmail}`);
-    return this.http.delete(`${this.URI}/delete/${id}`, this.httpOptions);
+    const headers = this.headers.append('User-Email', `${mail}${compEmail}`);
+    return this.http.delete(`${this.URI}/delete/${id}`, { headers });
   }
 
   // Metodo para agregar a fovoritos un mensaje.
   putInboxFavorite(mail, form) {
     mail = mail.toLowerCase();
-    console.log(mail);
     const compEmail = '@gmail.com';
-    this.httpOptions.headers.append('User-Email', `${compEmail}`);
-    return this.http.put(`${this.URI}/inbox/${form.id}`, form, this.httpOptions);
+    const headers = this.headers.append('User-Email', `${mail}${compEmail}`);
+    return this.http.put(`${this.URI}/inbox/${form.id}`, form, { headers });
   }
 
   // Retorna los mensajes que correspondan al correo enviado.
   // Si se envia el parametro id nos retorna el detalle de ese mensaje.
   getSent(mail, id?) {
-
     mail = mail.toLowerCase();
-    console.log(mail);
     const compEmail = '@gmail.com';
 
     if (id) {

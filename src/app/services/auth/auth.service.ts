@@ -18,8 +18,6 @@ export class AuthService {
   };
 
   postUser(form) {
-    console.log('llego al servicio');
-
     return this.http.post(`${this.URI}/login`, form, this.httpOptions);
   }
   postNewUser(form) {

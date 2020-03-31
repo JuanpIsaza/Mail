@@ -16,8 +16,7 @@ import { PipesModule } from './pipes/pipes.module';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    SharedModule,
-    PipesModule
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

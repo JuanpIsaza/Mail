@@ -11,8 +11,9 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-
   doRegister$;
+  routeRegister = '/login';
+  textbtn = 'Inicia sesion';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,7 +34,6 @@ export class RegisterComponent implements OnInit {
 
   doRegister(form) {
     this.doRegister$ = this.authService.postNewUser(form).subscribe(res => {
-      console.log(res);
       this.router.navigate(['../inbox']);
     });
   }

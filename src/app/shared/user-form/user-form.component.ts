@@ -8,6 +8,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class UserFormComponent implements OnInit {
   @Input() form: FormGroup;
+  @Input() route: string;
+  @Input() textbtn: string;
   @Output() send = new EventEmitter();
   submitted = false;
 
