@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MailService } from 'src/app/services/mail/mail.service';
 import { catchError } from 'rxjs/internal/operators';
 import { throwError } from 'rxjs';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sent',
@@ -9,16 +10,32 @@ import { throwError } from 'rxjs';
   styleUrls: ['./sent.component.scss']
 })
 export class SentComponent implements OnInit {
+  filterForm: FormGroup;
   getMails$;
   msgSent = false;
   mails;
+  paramsFilter = ['Asunto', 'Destinatario', 'Descripcion'];
 
-  constructor(private mailService: MailService) {}
+  constructor(
+    private mailService: MailService,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
+    this.filterForm = this.formBuilder.group({
+      data: ['', [Validators.required, Validators.maxLength(50)]],
+      filter: ['', Validators.required],
+    });
     const userData = localStorage.getItem('datos');
-
     this.getMails(JSON.parse(userData));
+  }
+
+  onSubmit() {
+    this.doFilter(this.filterForm.value);
+  }
+
+  doFilter(form) {
+    console.log(form);
   }
 
   getMails({ user }) {

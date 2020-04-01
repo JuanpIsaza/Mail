@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { InboxComponent } from './inbox.component';
 import { PipesModule } from 'src/app/pipes/pipes.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -13,7 +14,13 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [InboxComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), PipesModule],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    PipesModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
   exports: [RouterModule]
 })
 export class InboxModule {}

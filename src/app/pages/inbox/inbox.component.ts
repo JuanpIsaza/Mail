@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MailService } from 'src/app/services/mail/mail.service';
 import { catchError } from 'rxjs/internal/operators';
 import { throwError } from 'rxjs';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-inbox',
@@ -9,6 +10,7 @@ import { throwError } from 'rxjs';
   styleUrls: ['./inbox.component.scss']
 })
 export class InboxComponent implements OnInit {
+  filterForm: FormGroup;
   getMails$;
   mails;
   msgGetMails = false;
@@ -16,10 +18,24 @@ export class InboxComponent implements OnInit {
   msgDeleteMails = false;
   mailsDeleted;
 
-  constructor(private mailService: MailService) {}
+  constructor(
+    private mailService: MailService,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
+    this.filterForm = this.formBuilder.group({
+      data: ['', [Validators.required, Validators.maxLength(50)]]
+    });
     this.getMails(this.getLocalstorage());
+  }
+
+  onSubmit() {
+    this.doFilter(this.filterForm.value);
+  }
+
+  doFilter(form) {
+    console.log(form);
   }
 
   getLocalstorage() {

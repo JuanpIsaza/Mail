@@ -1,6 +1,46 @@
 <section class="inbox uk-margin-top">
   <div class="cont-form uk-container">
     <h1>Bandeja de entrada</h1>
+
+    <form
+      class="form uk-margin-top uk-margin-bottom"
+      [formGroup]="filterForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <fieldset class="uk-fieldset uk-margin-bottom">
+        <div class="uk-margin-top">
+          <input
+            class="uk-input"
+            [ngClass]="{
+              'is-invalid':
+                filterForm.get(['data']).errors &&
+                !filterForm.get(['data']).untouched
+            }"
+            formControlName="data"
+            type="text"
+            placeholder="Realiza una busqueda por asunto."
+          />
+          <div *ngIf="filterForm.get(['data']).errors">
+            <div
+              class="uk-text-danger"
+              *ngIf="
+                filterForm.get(['data']).errors.required &&
+                !filterForm.get(['data']).untouched
+              "
+            >
+              Campo requerido.
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <button
+        class="uk-button uk-button-primary uk-margin-right"
+        [disabled]="filterForm.invalid"
+      >
+        Buscar
+      </button>
+    </form>
+
     <ng-container *ngIf="mails">
       <div class="uk-overflow-auto">
         <h3>Favoritos</h3>

@@ -1,6 +1,76 @@
 <section class="sent uk-margin-top">
   <div class="cont-form uk-container">
     <h1>Enviados</h1>
+
+    <form
+      class="form uk-margin-top uk-margin-bottom"
+      [formGroup]="filterForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <fieldset
+        class="uk-fieldset uk-margin-top uk-margin-bottom"
+      >
+        <div class="uk-margin-bottom">
+          <input
+            class="uk-input"
+            [ngClass]="{
+              'is-invalid':
+                filterForm.get(['data']).errors &&
+                !filterForm.get(['data']).untouched
+            }"
+            formControlName="data"
+            type="text"
+            placeholder="Realiza una busqueda por asunto."
+          />
+          <div *ngIf="filterForm.get(['data']).errors">
+            <div
+              class="uk-text-danger"
+              *ngIf="
+                filterForm.get(['data']).errors.required &&
+                !filterForm.get(['data']).untouched
+              "
+            >
+              Asunto requerido.
+            </div>
+            <div
+              class="uk-text-danger"
+              *ngIf="
+                filterForm.get(['data']).errors.maxlength &&
+                !filterForm.get(['data']).untouched
+              "
+            >
+              El Asunto debe contener como máximo 50 caracteres.
+            </div>
+          </div>
+        </div>
+        <div class="uk-margin-bottom">
+          <select class="uk-select" formControlName="filter">
+            <option [ngValue]="null" disabled>Selecciona un flitro</option>
+            <option *ngFor="let prf of paramsFilter" [ngValue]="prf">
+              {{ prf }}
+            </option>
+          </select>
+          <div *ngIf="filterForm.get(['filter']).errors">
+            <div
+              class="uk-text-danger"
+              *ngIf="
+                filterForm.get(['filter']).errors.required &&
+                !filterForm.get(['filter']).untouched
+              "
+            >
+              Filtro requerido.
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <button
+        class="uk-button uk-button-primary uk-margin-right"
+        [disabled]="filterForm.invalid"
+      >
+        Buscar
+      </button>
+    </form>
+
     <div class="uk-overflow-auto">
       <table
         class="uk-table uk-table-hover uk-table-striped uk-table-middle uk-table-divider"

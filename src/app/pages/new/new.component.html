@@ -12,7 +12,7 @@
               class="form-control uk-input"
               [ngClass]="{
                 'is-invalid':
-                  newForm.get(['subject']).errors && newForm.untouched
+                  newForm.get(['subject']).errors && !newForm.untouched
               }"
               placeholder="Asunto"
             />
@@ -34,7 +34,7 @@
                 !newForm.get(['subject']).untouched
               "
             >
-              El Asunto debe contener como máximo caracteres.
+              El Asunto debe contener como máximo 50 caracteres.
             </div>
           </div>
         </div>
