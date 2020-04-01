@@ -8,7 +8,7 @@
       (ngSubmit)="onSubmit()"
     >
       <fieldset
-        class="uk-fieldset uk-margin-top uk-margin-bottom"
+        class="uk-fieldset"
       >
         <div class="uk-margin-bottom">
           <input
@@ -20,7 +20,7 @@
             }"
             formControlName="data"
             type="text"
-            placeholder="Realiza una busqueda por asunto."
+            placeholder="Realiza una busqueda por algun filtro."
           />
           <div *ngIf="filterForm.get(['data']).errors">
             <div
@@ -30,7 +30,7 @@
                 !filterForm.get(['data']).untouched
               "
             >
-              Asunto requerido.
+              Campo requerido.
             </div>
             <div
               class="uk-text-danger"
@@ -39,7 +39,7 @@
                 !filterForm.get(['data']).untouched
               "
             >
-              El Asunto debe contener como máximo 50 caracteres.
+              El campo debe contener como máximo 50 caracteres.
             </div>
           </div>
         </div>
@@ -89,7 +89,9 @@
               <input
                 class="uk-checkbox"
                 type="checkbox"
+                disabled
                 value="{{ mail.favorite }}"
+                [checked]="mail.favorite"
               />
             </td>
             <td>{{ mail.subject }}</td>

@@ -34,8 +34,13 @@ export class InboxComponent implements OnInit {
     this.doFilter(this.filterForm.value);
   }
 
-  doFilter(form) {
-    console.log(form);
+  doFilter({ data }) {
+    console.log(data);
+    if (data) {
+      const result = this.mails.filter(item => item.subject === data);
+      console.log(result);
+      this.mails = result;
+    }
   }
 
   getLocalstorage() {

@@ -24,7 +24,7 @@ export class SentComponent implements OnInit {
   ngOnInit(): void {
     this.filterForm = this.formBuilder.group({
       data: ['', [Validators.required, Validators.maxLength(50)]],
-      filter: ['', Validators.required],
+      filter: ['', Validators.required]
     });
     const userData = localStorage.getItem('datos');
     this.getMails(JSON.parse(userData));
@@ -34,8 +34,24 @@ export class SentComponent implements OnInit {
     this.doFilter(this.filterForm.value);
   }
 
-  doFilter(form) {
-    console.log(form);
+  doFilter({ data, filter }) {
+    if (data && filter) {
+      if (filter === 'Asunto') {
+        filter = 'subject';
+      }
+      if (filter === 'Destinatario') {
+        filter = 'receiver';
+      }
+      if (filter === 'Descripcion') {
+        filter = 'description';
+      }
+      console.log(filter);
+
+      console.log(data);
+      const result = this.mails.filter(item => item[`${filter}`] === data);
+      console.log(result);
+      this.mails = result;
+    }
   }
 
   getMails({ user }) {

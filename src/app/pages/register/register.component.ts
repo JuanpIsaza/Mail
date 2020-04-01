@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   doRegister$;
   msgRegister = false;
   routeRegister = '/login';
-  textbtn = 'Inicia sesion';
+  textbtn = 'Regresar';
 
   constructor(
     private formBuilder: FormBuilder,
