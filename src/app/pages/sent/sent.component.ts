@@ -3,6 +3,7 @@ import { MailService } from 'src/app/services/mail/mail.service';
 import { catchError } from 'rxjs/internal/operators';
 import { throwError } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FilterSearchPipe } from 'src/app/pipes/filter-search/filter-search.pipe';
 
 @Component({
   selector: 'app-sent',
@@ -14,11 +15,13 @@ export class SentComponent implements OnInit {
   getMails$;
   msgSent = false;
   mails;
+  mailsCopy;
   paramsFilter = ['Asunto', 'Destinatario', 'Descripcion'];
 
   constructor(
     private mailService: MailService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private filterSearchPipe: FilterSearchPipe
   ) {}
 
   ngOnInit(): void {
@@ -45,13 +48,17 @@ export class SentComponent implements OnInit {
       if (filter === 'Descripcion') {
         filter = 'description';
       }
-      console.log(filter);
-
-      console.log(data);
-      const result = this.mails.filter(item => item[`${filter}`] === data);
-      console.log(result);
-      this.mails = result;
+      // const result = this.mails.filter(item => item[`${filter}`] === data);
+      const result = this.filterSearchPipe.transform(this.mails, data, filter);
+      this.mailsCopy = result;
     }
+  }
+
+  resetFilter() {
+    console.log(this.mailsCopy, this.mails);
+
+    this.mailsCopy = this.mails;
+    console.log(this.mailsCopy, this.mails);
   }
 
   getMails({ user }) {
@@ -78,6 +85,7 @@ export class SentComponent implements OnInit {
       .subscribe(
         res => {
           this.mails = res;
+          this.mailsCopy = this.mails;
         },
         error => console.log('error subscribe', error)
       );

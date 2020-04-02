@@ -7,9 +7,7 @@
       [formGroup]="filterForm"
       (ngSubmit)="onSubmit()"
     >
-      <fieldset
-        class="uk-fieldset"
-      >
+      <fieldset class="uk-fieldset">
         <div class="uk-margin-bottom">
           <input
             class="uk-input"
@@ -69,22 +67,28 @@
       >
         Buscar
       </button>
+      <button
+        class="uk-button uk-button-primary uk-margin-left"
+        (click)="resetFilter()"
+      >
+        Limpiar
+      </button>
     </form>
 
     <div class="uk-overflow-auto">
       <table
-        class="uk-table uk-table-hover uk-table-striped uk-table-middle uk-table-divider"
+        class="uk-table uk-table-hover uk-table-striped uk-text-center uk-table-middle uk-table-divider"
       >
         <thead>
           <tr>
-            <th>Favorito</th>
-            <th>Asunto</th>
-            <th>Destinatario</th>
-            <th>Descripción</th>
+            <th class="uk-text-center">Favorito</th>
+            <th class="uk-text-center">Asunto</th>
+            <th class="uk-text-center">Destinatario</th>
+            <th class="uk-text-center">Descripción</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let mail of mails; index as i">
+          <tr *ngFor="let mail of mailsCopy; index as i">
             <td>
               <input
                 class="uk-checkbox"

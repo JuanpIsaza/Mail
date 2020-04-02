@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { SentComponent } from './sent.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FilterSearchPipe } from 'src/app/pipes/filter-search/filter-search.pipe';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule
   ],
+  providers: [FilterSearchPipe],
   exports: [RouterModule]
 })
 export class SentModule {}

@@ -39,30 +39,40 @@
       >
         Buscar
       </button>
+      <button
+        class="uk-button uk-button-primary uk-margin-left"
+        (click)="resetFilter()"
+      >
+        Limpiar
+      </button>
     </form>
 
     <ng-container *ngIf="mails">
       <div class="uk-overflow-auto">
         <h3>Favoritos</h3>
         <table
-          class="uk-table uk-table-hover uk-table-striped uk-table-middle uk-table-divider"
+          class="uk-table uk-table-hover uk-table-striped uk-table-middle uk-text-center uk-table-divider"
         >
           <thead>
             <tr>
-              <th>Favorito</th>
-              <th>Asunto</th>
-              <th>Destinatario</th>
-              <th>Descripción</th>
-              <th>Eliminar mensaje</th>
+              <th class="uk-text-center">Favorito</th>
+              <th class="uk-text-center">Asunto</th>
+              <th class="uk-text-center">Destinatario</th>
+              <th class="uk-text-center">Descripción</th>
+              <th class="uk-text-center">Eliminar mensaje</th>
+              <th class="uk-text-center">Eliminar masivo</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let mail of mails | filterFavorites: true; index as i">
+            <tr
+              *ngFor="let mail of mailsCopy | filterFavorites: true; index as i"
+            >
               <td>
                 <input
                   class="uk-checkbox"
                   type="checkbox"
                   value="{{ mail.favorite }}"
+                  [checked]="mail.favorite"
                   (click)="doFavorite(mail)"
                 />
               </td>
@@ -70,10 +80,18 @@
               <td class="">{{ mail.receiver }}</td>
               <td class="">{{ mail.description }}</td>
               <td>
+                <button
+                  class="uk-button uk-button-primary uk-margin-right"
+                  (click)="doDelete(mail)"
+                >
+                  Eliminar
+                </button>
+              </td>
+              <td>
                 <input
                   class="uk-checkbox"
                   type="checkbox"
-                  (click)="doDelete(mail)"
+                  (change)="acumMails(mail)"
                 />
               </td>
             </tr>
@@ -84,19 +102,25 @@
     <ng-container *ngIf="mails">
       <div class="uk-overflow-auto">
         <table
-          class="uk-table uk-table-hover uk-margin-top uk-table-striped uk-table-middle uk-table-divider"
+          class="uk-table uk-table-hover uk-margin-top uk-table-striped uk-text-center uk-table-middle uk-table-divider"
         >
           <thead>
             <tr>
-              <th>Favorito</th>
-              <th>Asunto</th>
-              <th>Destinatario</th>
-              <th>Descripción</th>
-              <th>Eliminar mensaje</th>
+              <th class="uk-text-center">Favorito</th>
+              <th class="uk-text-center">Asunto</th>
+              <th class="uk-text-center">Destinatario</th>
+              <th class="uk-text-center">Descripción</th>
+              <th class="uk-text-center">Eliminar mensaje</th>
+              <th class="uk-text-center">Eliminar masivo</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let mail of mails | filterFavorites: false; index as i">
+            <tr
+              *ngFor="
+                let mail of mailsCopy | filterFavorites: false;
+                index as i
+              "
+            >
               <td>
                 <input
                   class="uk-checkbox"
@@ -109,16 +133,33 @@
               <td class="">{{ mail.receiver }}</td>
               <td class="">{{ mail.description }}</td>
               <td>
+                <button
+                  class="uk-button uk-button-primary uk-margin-right"
+                  (click)="doDelete(mail)"
+                >
+                  Eliminar
+                </button>
+              </td>
+              <td>
                 <input
                   class="uk-checkbox"
                   type="checkbox"
-                  (click)="doDelete(mail)"
+                  (change)="acumMails(mail, $event)"
                 />
               </td>
             </tr>
           </tbody>
         </table>
       </div>
+    </ng-container>
+
+    <ng-container *ngIf="mails">
+      <button
+        class="uk-button uk-button-primary uk-margin uk-align-right"
+        (click)="doDeleteMasive()"
+      >
+        Eliminar masivo
+      </button>
     </ng-container>
     <ng-container *ngIf="msgGetMails">
       <div class="uk-text-danger uk-margin-top">

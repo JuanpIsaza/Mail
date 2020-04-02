@@ -3,14 +3,14 @@
     <h1>Eliminados</h1>
     <div class="uk-overflow-auto">
       <table
-        class="uk-table uk-table-hover uk-table-striped uk-table-middle uk-table-divider"
+        class="uk-table uk-table-hover uk-table-striped uk-text-center uk-table-middle uk-table-divider"
       >
         <thead>
           <tr>
-            <th>Favorito</th>
-            <th>Asunto</th>
-            <th>Destinatario</th>
-            <th>Descripción</th>
+            <th class="uk-text-center">Favorito</th>
+            <th class="uk-text-center">Asunto</th>
+            <th class="uk-text-center">Destinatario</th>
+            <th class="uk-text-center">Descripción</th>
           </tr>
         </thead>
         <tbody>
@@ -19,8 +19,9 @@
               <input
                 class="uk-checkbox"
                 type="checkbox"
+                disabled
                 value="{{ mail.favorite }}"
-                readonly
+                [checked]="mail.favorite"
               />
             </td>
             <td>{{ mail.subject }}</td>

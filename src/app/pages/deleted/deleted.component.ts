@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DeletedService } from 'src/app/services/deleted/deleted.service';
 
 @Component({
   selector: 'app-deleted',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeletedComponent implements OnInit {
   mails;
-  constructor() {}
+  constructor(private deletedServie: DeletedService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.mails = this.deletedServie.storedData;
+  }
 }
